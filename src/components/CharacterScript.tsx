@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import type * as THREE from 'three'
 import GameObject, { Position } from '../@core/GameObject';
 import Graphic from '../@core/Graphic';
 import {

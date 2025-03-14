@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState, RefObject, useRef } from 'react';
+import type * as THREE from 'three'
 import { Position } from './GameObject';
 import Graphic, { GraphicProps } from './Graphic';
 import useComponentRegistry, { ComponentRef } from './useComponentRegistry';

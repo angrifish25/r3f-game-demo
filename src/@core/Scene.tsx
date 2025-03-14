@@ -7,6 +7,7 @@ import React, {
     useState,
 } from 'react';
 import { createPortal } from '@react-three/fiber';
+import type * as THREE from 'three'
 import useGame from './useGame';
 import useSceneManager from './useSceneManager';
 import { PubSubEvent } from './utils/createPubSub';
@@ -62,7 +63,7 @@ export default function Scene({ id, children }: Props) {
         setLevel,
     } = useSceneManager();
     const [instances, setInstances] = useState<React.ReactElement[]>([]);
-    const idleCallback = useRef();
+    const idleCallback = useRef<number>();
 
     const initEvents = useCallback(async () => {
         await publish<SceneInitEvent>('scene-init', id);
