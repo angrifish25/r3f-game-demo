@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/core';
+import { css, Global } from '@emotion/react';
 import React from 'react';
 import AssetLoader from './@core/AssetLoader';
 import Game from './@core/Game';
@@ -33,7 +33,7 @@ export default function App() {
     return (
         <>
             <Global styles={globalStyles} />
-            <div css={styles.root(width, height)}>
+            <div style={styles.root(width, height)}>
                 <Game cameraZoom={80}>
                     <AssetLoader urls={urls} placeholder="Loading assets ...">
                         <SceneManager defaultScene="office">
