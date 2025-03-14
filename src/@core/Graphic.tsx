@@ -1,5 +1,4 @@
-import React, { forwardRef, memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import { useUpdate } from 'react-three-fiber';
+import React, { forwardRef, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { Position } from './GameObject';
 import useAsset from './useAsset';
@@ -26,7 +25,7 @@ export interface GraphicProps {
 }
 
 // create geometry once and reuse
-const geometry = new THREE.PlaneBufferGeometry(1, 1);
+const geometry = new THREE.PlaneGeometry(1, 1);
 
 export default memo(
     /* eslint-disable react/prop-types */
@@ -61,8 +60,9 @@ export default memo(
         }
 
         const image = useAsset(src) as HTMLImageElement;
-        const textureRef = useUpdate<THREE.Texture>(texture => {
-            texture.needsUpdate = true;
+        const textureRef = useRef<THREE.Texture>();
+        useLayoutEffect(() => {
+            textureRef.current.needsUpdate = true;
         }, []);
         const mounted = useRef(true);
         const interval = useRef<number>();
@@ -78,7 +78,7 @@ export default memo(
             const textureOffsetY = (firstFrame[1] * frameHeight) / image.height;
             textureRef.current.offset.setX(textureOffsetX);
             textureRef.current.offset.setY(textureOffsetY);
-        }, [firstFrame, frameHeight, frameWidth, image, textureRef]);
+        }, [firstFrame, frameHeight, frameWidth, image]);
 
         // initial frame update
         useEffect(() => handleFrameUpdate(), [handleFrameUpdate]);
@@ -150,11 +150,15 @@ export default memo(
             >
                 {basic ? (
                     <meshBasicMaterial attach="material" {...materialProps}>
-                        <texture ref={textureRef} attach="map" {...textureProps} />
+                        <texture 
+                        ref={textureRef}
+                         attach="map" {...textureProps} />
                     </meshBasicMaterial>
                 ) : (
                     <meshLambertMaterial attach="material" {...materialProps}>
-                        <texture ref={textureRef} attach="map" {...textureProps} />
+                        <texture 
+                        ref={textureRef}
+                         attach="map" {...textureProps} />
                     </meshLambertMaterial>
                 )}
             </mesh>

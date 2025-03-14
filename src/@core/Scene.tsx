@@ -6,7 +6,7 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { createPortal } from 'react-three-fiber';
+import { createPortal } from '@react-three/fiber';
 import useGame from './useGame';
 import useSceneManager from './useSceneManager';
 import { PubSubEvent } from './utils/createPubSub';
@@ -80,7 +80,7 @@ export default function Scene({ id, children }: Props) {
             instantiate(newElement, portalNode) {
                 const key = newElement.key == null ? Math.random() : newElement.key;
                 const instance = portalNode
-                    ? createPortal(newElement, portalNode, null, key)
+                    ? createPortal(newElement, portalNode, null)
                     : React.cloneElement(newElement, { key });
                 setInstances(current => [...current, instance as React.ReactElement]);
                 return () => {

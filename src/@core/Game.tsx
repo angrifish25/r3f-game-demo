@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
-import { Canvas } from 'react-three-fiber';
+import { Canvas } from '@react-three/fiber';
 import { GameObjectLayer, GameObjectRef } from './GameObject';
 import { SceneExitEvent } from './Scene';
 import createPubSub, { PubSub } from './utils/createPubSub';
@@ -154,8 +154,8 @@ export default function Game({
                     far: 64,
                 }}
                 orthographic
-                noEvents
-                gl2
+                // noEvents
+                // gl2
                 // @ts-ignore
                 gl={{ antialias: false }}
                 onContextMenu={e => e.preventDefault()}

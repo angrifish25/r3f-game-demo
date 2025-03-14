@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { useFrame, useThree } from 'react-three-fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Position } from '../@core/GameObject';
 import { SceneReadyEvent } from '../@core/Scene';
